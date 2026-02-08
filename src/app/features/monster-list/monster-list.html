@@ -1,0 +1,38 @@
+<section class="monster-container">
+    <h2>Alle Monster</h2>
+
+    @if (monsterResource.isLoading()) {
+    <div class="status-message loading">
+        <p>Die Gilde sucht nach Spuren... bitte warten.</p>
+    </div>
+    }
+
+    @else if (monsterResource.error()) {
+    <div class="status-message error">
+        <p>Fehler beim Abrufen der Monsterdaten: {{ monsterResource.error() }}</p>
+    </div>
+    }
+
+    @else if (monsterResource.value(); as monsters) {
+    <div class="monster-grid">
+        @for (monster of monsters; track monster.id) {
+        <article class="monster-card">
+            <header>
+                <h3>{{ monster.name }}</h3>
+                <span class="species-tag">{{ monster.species }}</span>
+            </header>
+
+            <div class="card-content">
+                <p>{{ monster.description }}</p>
+
+                @if (monster.locations.length > 0) {
+                <small>Fundort: {{ monster.locations[0].name }}</small>
+                }
+            </div>
+        </article>
+        } @empty {
+        <p class="status-message">Keine Monster in diesem Gebiet gefunden.</p>
+        }
+    </div>
+    }
+</section>
