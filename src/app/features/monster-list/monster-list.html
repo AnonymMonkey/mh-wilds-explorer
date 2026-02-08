@@ -1,5 +1,5 @@
 <section class="monster-container">
-    <h2>Alle Monster</h2>
+    <h2>Alle Monster ({{monsterResource.value()?.length || 0}})</h2>
 
     @if (monsterResource.isLoading()) {
     <div class="status-message loading">
