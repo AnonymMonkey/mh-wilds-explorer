@@ -1,0 +1,42 @@
+header {
+  display: flex;
+  justify-content: center;
+
+  nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    padding: 40px 0;
+
+    img {
+      position: absolute;
+      pointer-events: none;
+      height: 100px;
+
+      &:first-of-type {
+        left: -60px;
+      }
+
+      &:last-of-type {
+        right: -60px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-size: 2rem;
+
+      transition: 0.75ms ease-in-out;
+      &:hover {
+        transition: 0.75ms ease-in-out;
+        transform: scale(1.1);
+        color: #ffcc00;
+        text-shadow: 2px 2px 4px #ffcc00;
+      }
+    }
+  }
+}
