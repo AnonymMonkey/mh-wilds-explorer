@@ -1,33 +1,131 @@
 .monster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(32%, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
 }
 
 .monster-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  background-image: url('../../../../public/assets/MHWilds-Database-main/monster/assets/app/zone-bg.png');
+  background-size: contain;
+
   transition: transform 0.2s;
 
   &:hover {
     transform: translateY(-5px);
+    cursor: pointer;
   }
 
-  h3 {
-    margin: 0;
-    color: #333;
+  header {
+    display: flex;
+    gap: 0.5rem;
+
+    img {
+      min-height: 54px;
+      height: 54px;
+    }
+
+    h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 
   .species-tag {
-    display: inline-block;
+    display: flex;
+    width: fit-content;
     background: #eee;
     padding: 2px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
     color: #666;
+  }
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  overflow: hidden;
+
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  width: 90%;
+  max-width: 50%;
+  background: #2a2a2a;
+  color: white;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+
+  &[open] {
+    animation: zoomCentered 0.3s ease-out;
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+.dialog-content {
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+  overflow-y: auto;
+
+  img {
+    height: 150px;
+    margin-bottom: 1rem;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.5rem;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+@keyframes zoomCentered {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

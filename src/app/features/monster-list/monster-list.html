@@ -16,11 +16,13 @@
     @else if (monsterResource.value(); as monsters) {
     <div class="monster-grid">
         @for (monster of monsters; track monster.id) {
-        <article class="monster-card">
+        <article class="monster-card" (click)="openDetails(monster)">
             <header>
+                <img [src]="getMonsterImagePath(monster.name)" [alt]="monster.name" (error)="handleImageError($event)">
                 <h3>{{ monster.name }}</h3>
-                <span class="species-tag">{{ monster.species }}</span>
             </header>
+
+            <span class="species-tag">{{ monster.species }}</span>
 
             <div class="card-content">
                 <p>{{ monster.description }}</p>
@@ -36,3 +38,33 @@
     </div>
     }
 </section>
+
+<dialog #monsterDialog (click)="$event.target === monsterDialog && closeDetails()">
+    @if (selectedMonster(); as monster) {
+    <div class="dialog-content">
+        <button class="close-btn" (click)="closeDetails()">✕</button>
+
+        <header class="dialog-header">
+            <img [src]="getMonsterImagePath(monster.name)" [alt]="monster.name" (error)="handleImageError($event)">
+            <h2>{{ monster.name }}</h2>
+            <span class="species-tag">{{ monster.species }}</span>
+        </header>
+
+        <hr>
+
+        <div class="dialog-body">
+            <h3>Tipp:</h3>
+            <p>{{ monster.tips }}</p>
+
+            @if (monster.locations.length > 0) {
+            <h3>Vorkommen</h3>
+            <ul>
+                @for (loc of monster.locations; track loc.id) {
+                <li>{{ loc.name }}</li>
+                }
+            </ul>
+            }
+        </div>
+    </div>
+    }
+</dialog>
